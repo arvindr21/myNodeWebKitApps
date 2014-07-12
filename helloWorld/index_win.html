@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Node Webkit</title>
+	<script type="text/javascript">
+	//get node webkit GUI
+	var gui = require('nw.gui');
+
+		 // get the window object
+    var win = gui.Window.get();
+	var menubar = new gui.Menu({
+        type: 'menubar'
+    });
+
+	var file = new gui.Menu();
+	var subMenu = new gui.Menu();
+
+    file.append(new gui.MenuItem({
+        label: 'Action 1',
+        click: function() {
+            alert('Action 1 Clicked');
+        }
+    }));
+
+    file.append(new gui.MenuItem({
+        label: 'Action 2',
+        click: function() {
+            alert('Action 2 Clicked');
+        }
+    }));
+
+    subMenu.append(new gui.MenuItem({
+        label: 'SubMenu Action 1',
+        click: function() {
+            alert('SubMenu Action 1 Clicked');
+        }
+    }));
+
+    subMenu.append(new gui.MenuItem({
+        label: 'SubMenu Action 2',
+        click: function() {
+            alert('SubMenu Action 2 Clicked');
+        }
+    }));
+
+	menubar.append(new gui.MenuItem({ label: 'File', submenu: file}));
+	file.append(new gui.MenuItem({ label: 'Sub Action Menu', submenu: subMenu}));
+
+	win.menu = menubar;
+
+	var tray = new gui.Tray({
+		icon : 'icon.png',
+        title: 'App Tray'
+    });
+
+    // Give it a menu
+    var menu = new gui.Menu();
+    menu.append(new gui.MenuItem({
+        type: 'checkbox',
+        label: 'Are you sure?'
+    }));
+    tray.menu = menu;
+
+    // Clipboard
+    // We can not create a clipboard, we have to receive the system clipboard
+    var clipboard = gui.Clipboard.get();
+
+    // Read from clipboard
+    var text = clipboard.get('text');
+    alert('Clipboard text : '+text);
+    </script>
+</head>
+<body>
+    <h1>Hello Node Webkit</h1>
+    
+</body>
+</html>

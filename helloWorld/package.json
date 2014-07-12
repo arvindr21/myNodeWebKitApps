@@ -1,0 +1,29 @@
+{
+  "name": "myapp.helloworldapp",
+  "version": "0.0.1",
+  "description": "A Hello Node webkit app ",
+  "main": "index.html",
+  "window": {
+    "title": "helloWorld App",
+    "icon": "icon.png",
+    "toolbar": true,
+    "resizable": false,
+    "width": 800,
+    "height": 500,
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600,
+    "position": "mouse"
+  },
+  "webkit": {
+    "plugin": false,
+    "java": false,
+    "page-cache": false
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

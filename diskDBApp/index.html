@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello Node Webkit</title>
+</head>
+
+<body>
+    <h1>Persisted Settings</h1>
+    <ul id="settings">
+    </ul>
+    <script type="text/javascript">
+    //get node webkit GUI
+    var gui = require('nw.gui');
+
+    // get the window object
+    var win = gui.Window.get();
+
+    // imit diskDB
+    var db = require('diskdb');
+    db.connect('appPersistence', ['settings']);
+
+    var _settings = [{
+        "option 1": true
+    }, {
+        "option 2": false
+    }, {
+        "default value": 'foo'
+    }];
+
+    // need not save everytime
+    if (db.settings.count() == 0) db.settings.save(_settings);
+
+    // get the settings
+    var settings = db.settings.find(),
+        html = '';
+    for (var i = 0; i < settings.length; i++) {
+        var _o = settings[i],
+            li = '<li>';
+        for (var prop in _o) {
+            if (prop != '_id') {
+                li += prop + ' : ' + _o[prop];
+            }
+        }
+        li += '</li>';
+        html += li;
+    };
+    document.getElementById('settings').innerHTML = html;
+    </script>
+</body>
+
+</html>
